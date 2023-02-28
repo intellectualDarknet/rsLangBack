@@ -9,7 +9,7 @@ router.route('/').get(async (req, res) => {
   const page = extractQueryParam(req.query.page, 0);
   const group = extractQueryParam(req.query.group, 0);
 
-  if (isNaN(page) || isNaN(group)) {
+  if (isNaN(group)) {
     throw new BAD_REQUEST_ERROR(
       'Wrong query parameters: the group, page numbers should be valid integers'
     );

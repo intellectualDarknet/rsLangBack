@@ -3,9 +3,15 @@ const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
 const ENTITY_NAME = 'word';
 
 const getAll = async conditions => {
-  const { group, page } = conditions;
+  const { group, page, wordsPerPage } = conditions;
 
-  return Word.find({ group, page });
+  const searchQuery = { group };
+
+  if (!Object.is(null, page)) {
+    searchQuery.page = page;
+  }
+
+  return Word.find(searchQuery).limit(wordsPerPage);
 };
 
 const get = async id => {
