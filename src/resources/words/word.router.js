@@ -22,6 +22,11 @@ router.route('/').get(async (req, res) => {
   res.status(OK).send(words.map(word => word.toResponse()));
 });
 
+router.route('/sequence').get(async (req, res) => {
+  const words = await wordService.getSequence();
+  res.status(OK).send(words.map(word => word.toResponse()));
+});
+
 router.route('/:id').get(async (req, res) => {
   const word = await wordService.get(req.params.id);
   res.status(OK).send(word.toResponse());

@@ -22,4 +22,7 @@ const get = async id => {
   return word;
 };
 
-module.exports = { getAll, get };
+const getSequence = async () => {
+  return Word.find({ word: 1, _id: 0 });
+};
+module.exports = { getAll, get, getSequence };
