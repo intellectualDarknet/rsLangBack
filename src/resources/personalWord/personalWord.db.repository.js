@@ -38,13 +38,13 @@ const updateWord = async (userId, wordId, updatedWord) => {
 };
 
 const getPersonalWordsToRepeat = async (userId, body) => {
-  const { sign } = body;
+  const { language, sign } = body;
   return PersonalWord.find({date_to_repeat: { $lte: Date.now()}, user_id: { $eq: userId }, inRow: { $gte: 1}});
 };
 
 const getWordsToLearn = async (userId, body) => {
   const { language, sign, limit } = body
-  const word = await PersonalWord.find({inRow: { $eq: 0 }, user_id: { $eq: userId }}).limit(limit);
+  const word = await PersonalWord.find({inRow: { $eq: 0 }, user_id: { $eq: userId }}).limit(limit ? limit : 10);
   if (!word) {
     throw new NOT_FOUND_ERROR(ENTITY_NAME, { id });
   }
