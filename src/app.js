@@ -19,6 +19,7 @@ const userWordsRouter = require('./resources/userWords/userWord.router');
 const aggregatedWordsRouter = require('./resources/aggregatedWords/aggregatedWord.router');
 const statisticRouter = require('./resources/statistics/statistic.router');
 const settingRouter = require('./resources/settings/setting.router');
+const memoRouter = require('./resources/personalWord/personalWord.router');
 const errorHandler = require('./errors/errorHandler');
 const checkAuthentication = require('./resources/authentication/checkAuthentication');
 const { userIdValidator } = require('./utils/validation/validator');
@@ -58,6 +59,8 @@ app.use('/words', wordRouter);
 app.use('/signin', signinRouter);
 
 app.use('/users', userRouter);
+
+app.use('/memo', memoRouter);
 
 userRouter.use('/:id/tokens', userIdValidator, userTokenRouter);
 
