@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const DailyStatistics = new Schema(
   {
     user_id: { type: mongoose.Schema.ObjectId, ref: 'users' },
-    date: { type: Number, required: true, max: 100 },
-    repeated_today: { type: Number, required: true, max: 100 },
-    new_words_today: { type: String, required: true, max: 100 }
+    date: { type: Date, required: true, max: 100 },
+    repeated: { type: Number, required: true, max: 100 },
+    new: { type: Number, required: true, max: 100 }
   },
   { collection: 'dailyStatistics' }
 );
