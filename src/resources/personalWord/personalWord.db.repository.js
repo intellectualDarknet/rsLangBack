@@ -97,20 +97,48 @@ const updateWord = async (userId, wordId, wordToUpdate) => {
 const getPersonalWordsToRepeat = async (userId, body) => {
   const { language, sign } = body;
   console.log(language, sign);
-  return PersonalWord.find({
-    user_id: { $eq: userId },
-    date_to_repeat: { $lte: Date.now() },
-    inRow: { $gte: 1 }
-  });
+  return PersonalWord.find(
+    {
+      user_id: { $eq: userId },
+      date_to_repeat: { $lte: Date.now() },
+      inRow: { $gte: 1 }
+    },
+    {
+      _id: 0,
+      id: '$_id',
+      hierogliphs: 1,
+      writings: 1,
+      meaning: 1,
+      howToRemember: 1,
+      inRow: 1,
+      date_to_repeat: 1,
+      sign: 1,
+      language: 1
+    }
+  );
 };
 
 const getWordsToLearn = async (userId, body) => {
   const { language, sign, limit } = body;
   console.log(language, sign);
-  const word = await PersonalWord.find({
-    inRow: 0,
-    user_id: userId
-  }).limit(limit ? limit : 10);
+  const word = await PersonalWord.find(
+    {
+      inRow: 0,
+      user_id: userId
+    },
+    {
+      _id: 0,
+      id: '$_id',
+      hierogliphs: 1,
+      writings: 1,
+      meaning: 1,
+      howToRemember: 1,
+      inRow: 1,
+      date_to_repeat: 1,
+      sign: 1,
+      language: 1
+    }
+  ).limit(limit ? limit : 10);
   if (!word) {
     throw new NOT_FOUND_ERROR(`${ENTITY_NAME}not found`);
   }

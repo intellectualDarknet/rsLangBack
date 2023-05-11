@@ -23,7 +23,7 @@ router.route('/:userId/:wordId').put(async (req, res) => {
   res.status(OK).send(word);
 });
 
-router.route('/:userId/repeat').get(async (req, res) => {
+router.route('/:userId/repeat').post(async (req, res) => {
   const userId = extractQueryParam(req.query.userId);
   console.log(userId);
 
@@ -34,7 +34,7 @@ router.route('/:userId/repeat').get(async (req, res) => {
   res.status(OK).send(word);
 });
 
-router.route('/:userId/learn').get(async (req, res) => {
+router.route('/:userId/learn').post(async (req, res) => {
   const params = req.params.userId;
   console.log('params', params);
 
